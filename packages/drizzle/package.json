@@ -1,0 +1,41 @@
+{
+  "name": "@repo/drizzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "generate": "drizzle-kit generate",
+    "migrate": "tsx src/migrate.ts",
+    "studio": "drizzle-kit studio"
+  },
+  "keywords": [],
+  "author": "Daniel Marques",
+  "license": "ISC",
+  "dependencies": {
+    "@repo/env": "workspace:*",
+    "@repo/eslint": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.44.2",
+    "pg": "^8.16.0",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/pg": "^8.15.4",
+    "chalk": "^5.4.1",
+    "drizzle-kit": "^0.31.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

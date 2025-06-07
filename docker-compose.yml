@@ -1,0 +1,13 @@
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    restart: unless-stopped
+    networks:
+      - default
+
