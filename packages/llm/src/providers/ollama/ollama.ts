@@ -1,5 +1,6 @@
 import axios from "axios";
-import { LLMProvider } from "../prov";
+import { LLMProvider } from "../interfaces/llm";
+import { OLLAMA_EMBEDDING_URL } from "@repo/env";
 
 export class OllamaProvider implements LLMProvider {
   async complete(prompt: string): Promise<string> {
