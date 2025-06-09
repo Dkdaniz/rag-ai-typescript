@@ -1,0 +1,17 @@
+meta {
+  name: create
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3001/embedding
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+  "text":"ola"
+  }
+}

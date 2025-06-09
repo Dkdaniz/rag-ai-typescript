@@ -1,7 +1,7 @@
 import axios from "axios";
-import { OLLAMA_EMBEDDING_URL, OLLAMA_EMBEDDING_MODEL } from "../config";
+import { OLLAMA_EMBEDDING_URL, OLLAMA_EMBEDDING_MODEL } from "../../config";
 
-export async function generateEmbedding(text: string): Promise<number[]> {
+export async function generateEmbeddingOllama(text: string): Promise<number[]> {
   try {
     const response = await axios.post(OLLAMA_EMBEDDING_URL, {
       model: OLLAMA_EMBEDDING_MODEL,

@@ -1,17 +1,17 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { DATABASE_URL } from "@repo/env";
+import { POSTGRES_DATABASE_URL } from "@repo/env";
 import * as schema from "../schema";
 
 // Database connection config
-const connectionString = DATABASE_URL;
+const connectionString = POSTGRES_DATABASE_URL;
 
 if (!connectionString) {
   throw new Error("DATABASE_URL environment variable is not set");
 }
 
 // Client for queries only
-const connection = postgres(process.env.DATABASE_URL as string, {
+export const connection = postgres(process.env.DATABASE_URL as string, {
   max: 1,
   ssl: process.env.NODE_ENV === "production" ? "require" : false,
 });
