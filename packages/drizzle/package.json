@@ -22,14 +22,13 @@
   "license": "ISC",
   "dependencies": {
     "@repo/env": "workspace:*",
-    "@repo/eslint": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
-    "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2",
     "pg": "^8.16.0",
     "postgres": "^3.4.7"
   },
   "devDependencies": {
+    "@repo/eslint": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/pg": "^8.15.4",
     "chalk": "^5.4.1",

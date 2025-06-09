@@ -1,5 +1,5 @@
 {
-  "name": "@repo/qdrant",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@repo/drizzle": "workspace:*",
+    "@repo/embedding": "workspace:*",
     "@repo/env": "workspace:*",
-    "@repo/eslint": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
-    "@qdrant/js-client-rest": "^1.14.1"
+    "@repo/qdrant": "workspace:*",
+    "fastify": "^5.3.3"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3",
-    "tsup": "^8.5.0",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "@repo/eslint": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "tsup": "^8.5.0"
   }
 }

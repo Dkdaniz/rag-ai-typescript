@@ -1,5 +1,5 @@
 {
-  "name": "@repo/qdrant",
+  "name": "llm",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,12 +13,7 @@
     "@repo/env": "workspace:*",
     "@repo/eslint": "workspace:*",
     "@repo/tsconfig": "workspace:*",
-    "@qdrant/js-client-rest": "^1.14.1"
-  },
-  "devDependencies": {
-    "@types/node": "^22.15.3",
-    "tsup": "^8.5.0",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "axios": "^1.9.0",
+    "openai": "^5.1.1"
   }
 }
