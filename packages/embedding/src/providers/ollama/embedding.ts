@@ -1,9 +1,9 @@
-import axios from "axios";
-import { OLLAMA_EMBEDDING_URL, OLLAMA_EMBEDDING_MODEL } from "../../config";
+import { OLLAMA_EMBEDDING_MODEL } from "@repo/env";
+import { ollmaClient } from "./config";
 
-export async function generateEmbeddingOllama(text: string): Promise<number[]> {
+export async function embedding(text: string): Promise<number[]> {
   try {
-    const response = await axios.post(OLLAMA_EMBEDDING_URL, {
+    const response = await ollmaClient.post("/api/embeddings", {
       model: OLLAMA_EMBEDDING_MODEL,
       prompt: text,
     });
