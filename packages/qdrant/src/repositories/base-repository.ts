@@ -13,6 +13,7 @@ export abstract class QdrantBaseRepository {
     const exists = collections.collections.find(
       (c) => c.name === this.collectionName
     );
+
     if (!exists) {
       await qdrantClient.createCollection(this.collectionName, {
         vectors: { size, distance, on_disk: true },
