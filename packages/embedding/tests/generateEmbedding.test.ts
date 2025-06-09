@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { generateEmbeddingOllama } from "../src/index";
+import { generateEmbeddingOllama } from "../src/providers/index";
 
 describe("generateEmbedding", () => {
   it("should return a valid embedding array", async () => {
