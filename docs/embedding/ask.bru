@@ -1,17 +1,17 @@
 meta {
-  name: create
+  name: ask
   type: http
   seq: 1
 }
 
-get {
-  url: http://localhost:3001/embedding
+post {
+  url: http://localhost:3000/ask
   body: json
   auth: none
 }
 
 body:json {
   {
-  "text":"ola"
+  "question":"Ola pessoal"
   }
 }

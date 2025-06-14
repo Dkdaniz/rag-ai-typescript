@@ -1,1 +1,1 @@
-export * from "./ollama/generateEmbedding";
+export * from "./ollama/embedding";

@@ -29,9 +29,15 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
       '@repo/qdrant':
         specifier: workspace:*
         version: link:../../packages/qdrant
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       fastify:
         specifier: ^5.3.3
         version: 5.3.3
@@ -45,6 +51,9 @@ importers:
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(postcss@8.5.4)(tsx@4.19.4)(typescript@5.8.3)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   packages/drizzle:
     dependencies:
@@ -206,6 +215,24 @@ importers:
         version: 5.8.3
 
   packages/tsconfig: {}
+
+  packages/utils:
+    dependencies:
+      '@repo/env':
+        specifier: workspace:*
+        version: link:../env
+      '@repo/eslint':
+        specifier: workspace:*
+        version: link:../eslint
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.5
+      uuid:
+        specifier: ^11.1.0
+        version: 11.1.0
 
 packages:
 
@@ -1767,6 +1794,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.1.5:
+    resolution: {integrity: sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -2379,6 +2411,10 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+    hasBin: true
 
   vite-node@3.2.2:
     resolution: {integrity: sha512-Xj/jovjZvDXOq2FgLXu8NsY4uHUMWtzVmMC2LkCu9HWdr9Qu1Is5sanX3Z4jOFKdohfaWDnEJWp9pRP0vVpAcA==}
@@ -4038,6 +4074,8 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  nanoid@5.1.5: {}
+
   natural-compare@1.4.0: {}
 
   object-assign@4.1.1: {}
@@ -4689,6 +4727,8 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  uuid@11.1.0: {}
 
   vite-node@3.2.2(@types/node@22.15.3)(tsx@4.19.4):
     dependencies:

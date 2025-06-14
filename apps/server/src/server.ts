@@ -1,7 +1,7 @@
 import Fastify from "fastify";
-import { askRoute } from "./routes/ask";
-import { ingestRoute } from "./routes/ingest";
-import { searchRoute } from "./routes/search";
+import { askRoute } from "./routers/ask";
+import { ingestRoute } from "./routers/ingest";
+import { searchRoute } from "./routers/search";
 
 const app = Fastify({ logger: true });
 

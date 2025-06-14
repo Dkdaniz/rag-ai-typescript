@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { DocumentRepository } from "@repo/qdrant";
-import { embedding } from "@repo/ollama";
+import { embedding } from "@repo/embedding";
 
 export async function searchRoute(app: FastifyInstance) {
   app.get("/", async (request, reply) => {

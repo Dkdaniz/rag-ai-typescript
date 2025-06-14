@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { OLLAMA_EMBEDDING_URL } from "@repo/env";
+import { OLLAMA_URL } from "@repo/env";
 
 export const ollmaClient = axios.create({
-  baseURL: OLLAMA_EMBEDDING_URL || "http://127.0.0.1:11434/api/embeddings",
+  baseURL: OLLAMA_URL || "http://127.0.0.1:11434",
 });
 
 // Add a request interceptor

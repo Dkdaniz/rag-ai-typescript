@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,12 +13,15 @@
     "@repo/drizzle": "workspace:*",
     "@repo/embedding": "workspace:*",
     "@repo/env": "workspace:*",
+    "@repo/llm": "workspace:*",
     "@repo/qdrant": "workspace:*",
+    "@repo/utils": "workspace:*",
     "fastify": "^5.3.3"
   },
   "devDependencies": {
     "@repo/eslint": "workspace:*",
     "@repo/tsconfig": "workspace:*",
-    "tsup": "^8.5.0"
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   }
 }

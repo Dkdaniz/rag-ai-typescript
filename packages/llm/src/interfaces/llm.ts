@@ -1,3 +1,6 @@
+import { ChatCompletionMessageParam } from "openai/resources";
+
+export type Message = ChatCompletionMessageParam;
 export interface LLMProvider {
-  complete(prompt: string): Promise<string>;
+  complete(message: Message[]): Promise<string>;
 }

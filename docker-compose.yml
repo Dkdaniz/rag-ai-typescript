@@ -27,8 +27,8 @@ services:
     # volumes:
     #   - ./qdrant_data:/qdrant/storage
 
-# configs:
-#   qdrant_config:
-#     content: |
-#       log_level: INFO
+configs:
+  qdrant_config:
+    content: |
+      log_level: INFO
 

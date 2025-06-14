@@ -19,6 +19,8 @@ export abstract class QdrantBaseRepository {
         vectors: { size, distance, on_disk: true },
       });
     }
+
+    console.log(collections);
   }
 
   async upsert(points: QdrantPoint[]): Promise<void> {
