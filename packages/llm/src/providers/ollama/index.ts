@@ -14,12 +14,14 @@ export class OllamaProvider implements LLMProvider {
   async complete(messages: Message[]): Promise<string> {
     const message = this.formatMessagesForOllama(messages);
 
+    console.log({ message });
+
     const response = await axios.post(`${OLLAMA_URL}/api/generate`, {
       model: OLLAMA_CHAT_MODEL,
       prompt: message,
       stream: false,
     });
 
-    return response.data.message?.content?.trim() || "";
+    return response.data.response?.trim() || "";
   }
 }

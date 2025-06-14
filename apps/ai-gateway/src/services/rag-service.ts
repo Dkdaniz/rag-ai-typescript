@@ -14,7 +14,11 @@ export class RAGService {
 
     const context = docs.map((d) => d.payload?.text).join("\n---\n");
     const messages = [
-      { role: "system", content: "Você é um assistente útil." },
+      {
+        role: "system",
+        content:
+          "Você é um assistente que responde **exclusivamente em português do Brasil**. Evite palavras de outros idiomas como espanhol ou inglês, exceto quando forem citadas literalmente no contexto.",
+      },
       {
         role: "user",
         content: `Contexto: ${context}`,

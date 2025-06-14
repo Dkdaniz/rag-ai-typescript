@@ -9,6 +9,7 @@ export async function askRoute(
 
   app.post("/", async (request, reply) => {
     const { question } = request.body as { question: string };
+    
     const answer = await ragService.ask(question);
     reply.send({ answer });
   });
