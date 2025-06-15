@@ -29,6 +29,8 @@ export class RAGService {
       },
     ] as any;
 
+    console.log(AI_IS_LOCAL);
+
     const AiProvider =
       AI_IS_LOCAL === true ? new OllamaProvider() : new OpenAIProvider();
     const response = await AiProvider.complete(messages);

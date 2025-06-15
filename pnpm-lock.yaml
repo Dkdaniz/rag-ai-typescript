@@ -18,7 +18,7 @@ importers:
         specifier: 5.8.2
         version: 5.8.2
 
-  apps/server:
+  apps/ai-gateway:
     dependencies:
       '@repo/drizzle':
         specifier: workspace:*
@@ -38,6 +38,31 @@ importers:
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      fastify:
+        specifier: ^5.3.3
+        version: 5.3.3
+    devDependencies:
+      '@repo/eslint':
+        specifier: workspace:*
+        version: link:../../packages/eslint
+      '@repo/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(postcss@8.5.4)(tsx@4.19.4)(typescript@5.8.3)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
+  apps/server:
+    dependencies:
+      '@repo/drizzle':
+        specifier: workspace:*
+        version: link:../../packages/drizzle
+      '@repo/env':
+        specifier: workspace:*
+        version: link:../../packages/env
       fastify:
         specifier: ^5.3.3
         version: 5.3.3

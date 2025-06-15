@@ -2,12 +2,7 @@
   "name": "@repo/drizzle",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**"
-  ],
+  "main": "index.ts",
   "scripts": {
     "build": "tsup",
     "lint": "eslint src/",
