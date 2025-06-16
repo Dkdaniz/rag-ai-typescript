@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{base_url}}/users
+  body: json
   auth: none
+}
+
+body:json {
+  {
+  "email": "admin@admin.com",
+  "name": "daniel"
+  }
 }

@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{base_url}}/questions
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "userId": "5b49c9b5-9364-4af6-863d-a64b5dd20e1b",
+    "answer": "quem e a esposa do daniel"
+  }
 }

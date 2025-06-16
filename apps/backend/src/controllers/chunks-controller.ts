@@ -37,7 +37,7 @@ export class ChunkController {
     const chunks = chunkTextByTokens({
       encoder: encoder,
       text: doc.text,
-      maxTokens: 200,
+      maxTokens: 100,
       overlap: 30,
     });
 
@@ -52,6 +52,8 @@ export class ChunkController {
         content,
         tokenCount,
       });
+
+      console.log(vector);
 
       await this.chunkRepositoryQdrant.upsert([
         {

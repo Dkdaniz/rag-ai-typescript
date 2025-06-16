@@ -19,6 +19,8 @@ export class RAGService {
     await this.chunkRepository.initCollection(768, "Cosine");
     const docs = await this.chunkRepository.search(vector, 5, filter);
 
+    console.log(docs);
+
     const context = docs.map((d) => d.payload?.content).join("\n---\n");
     console.log({ context });
     const messages = [
@@ -39,8 +41,9 @@ export class RAGService {
 
     console.log(AI_IS_LOCAL);
 
-    const AiProvider =
-      AI_IS_LOCAL === true ? new OllamaProvider() : new OpenAIProvider();
+    const AiProvider = Boolean(AI_IS_LOCAL)
+      ? new OllamaProvider()
+      : new OpenAIProvider();
     const response = await AiProvider.complete(messages);
 
     return response;

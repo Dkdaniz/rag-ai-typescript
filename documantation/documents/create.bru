@@ -4,8 +4,16 @@ meta {
   seq: 1
 }
 
-get {
-  url: 
-  body: none
+post {
+  url: {{base_url}}/documents
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "userId": "5b49c9b5-9364-4af6-863d-a64b5dd20e1b",
+    "source": "texto.pdf",
+    "text": "o usuario e o daniel e sua esposa a daiane"
+  }
 }

@@ -14,4 +14,4 @@ export const OLLAMA_CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL;
 
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-export const AI_IS_LOCAL = process.env.AI_IS_LOCAL == "true";
+export const AI_IS_LOCAL = process.env.AI_IS_LOCAL;

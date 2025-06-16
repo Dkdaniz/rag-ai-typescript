@@ -24,6 +24,8 @@ export class QuestionsController {
       answer: string;
     };
 
+    if (!userId) return reply.status(404).send({ error: "UserId not found" });
+
     const filter: FilterAsk[] = [
       {
         key: "userId",

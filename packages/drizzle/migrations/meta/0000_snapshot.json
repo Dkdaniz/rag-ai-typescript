@@ -1,5 +1,5 @@
 {
-  "id": "b88f3f79-e0fb-43f9-9a12-d25cb1dad0d5",
+  "id": "a9ebb3fa-7eec-4b14-beed-2cd806bce80b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,6 +12,12 @@
           "name": "id",
           "type": "varchar(36)",
           "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
           "notNull": true
         },
         "document_id": {
@@ -49,6 +55,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "chunks_user_id_users_id_fk": {
+          "name": "chunks_user_id_users_id_fk",
+          "tableFrom": "chunks",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "chunks_document_id_documents_id_fk": {
           "name": "chunks_document_id_documents_id_fk",
           "tableFrom": "chunks",
