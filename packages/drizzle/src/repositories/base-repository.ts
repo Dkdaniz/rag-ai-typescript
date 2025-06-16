@@ -53,7 +53,7 @@ export abstract class BaseRepository<T> {
   }
 
   async update(input: {
-    id: number;
+    id: string;
     data: Partial<Omit<T, "id" | "createdAt" | "updatedAt">>;
   }): Promise<T | undefined> {
     const [record] = await db

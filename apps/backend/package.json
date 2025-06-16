@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@repo/drizzle": "workspace:*",
+    "@repo/embedding": "workspace:*",
     "@repo/env": "workspace:*",
+    "@repo/qdrant": "workspace:*",
+    "@repo/utils": "workspace:*",
     "fastify": "^5.3.3"
   },
   "devDependencies": {

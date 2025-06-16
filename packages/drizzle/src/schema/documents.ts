@@ -1,12 +1,12 @@
-import { pgTable, serial, text, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { users } from "./users";
-import { varchar } from "drizzle-orm/pg-core";
+
 import { relations } from "drizzle-orm";
 import { chunks } from "./chunks";
 
 export const documents = pgTable("documents", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: varchar("user_id").references(() => users.id),
   source: text("source").notNull(),
   text: text("text").notNull(),
   hash: varchar("hash", { length: 64 }).notNull().unique(),

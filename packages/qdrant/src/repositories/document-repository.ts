@@ -1,5 +1,5 @@
 import { QdrantBaseRepository } from "./base-repository";
 
-export class DocumentRepository extends QdrantBaseRepository {
+export class DocumentRepositoryQdrant extends QdrantBaseRepository {
   protected collectionName = "documents";
 }

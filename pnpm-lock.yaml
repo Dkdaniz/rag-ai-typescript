@@ -55,14 +55,23 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
-  apps/server:
+  apps/backend:
     dependencies:
       '@repo/drizzle':
         specifier: workspace:*
         version: link:../../packages/drizzle
+      '@repo/embedding':
+        specifier: workspace:*
+        version: link:../../packages/embedding
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/qdrant':
+        specifier: workspace:*
+        version: link:../../packages/qdrant
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       fastify:
         specifier: ^5.3.3
         version: 5.3.3
@@ -243,6 +252,9 @@ importers:
 
   packages/utils:
     dependencies:
+      '@dqbd/tiktoken':
+        specifier: ^1.0.21
+        version: 1.0.21
       '@repo/env':
         specifier: workspace:*
         version: link:../env
@@ -260,6 +272,9 @@ importers:
         version: 11.1.0
 
 packages:
+
+  '@dqbd/tiktoken@1.0.21':
+    resolution: {integrity: sha512-grBxRSY9+/iBM205EWjbMm5ySeXQrhJyXWMP38VJd+pO2DRGraDAbi4n8J8T9M4XY1M/FHgonMcmu3J+KjcX0Q==}
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
@@ -2567,6 +2582,8 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
+
+  '@dqbd/tiktoken@1.0.21': {}
 
   '@drizzle-team/brocli@0.10.2': {}
 

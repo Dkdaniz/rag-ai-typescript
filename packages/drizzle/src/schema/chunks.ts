@@ -1,15 +1,20 @@
-import { pgTable, serial, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  uuid,
+  text,
+  varchar,
+  timestamp,
+  integer,
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { documents } from "./documents";
-import { integer } from "drizzle-orm/pg-core";
 
 export const chunks = pgTable("chunks", {
-  id: serial("id").primaryKey(),
-  documentId: integer("document_id")
+  id: uuid("id").primaryKey().defaultRandom(),
+  documentId: varchar("document_id")
     .references(() => documents.id)
     .notNull(),
   content: text("content").notNull(),
-  vectorId: varchar("vector_id", { length: 128 }).notNull(),
   tokenCount: integer("token_count").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
