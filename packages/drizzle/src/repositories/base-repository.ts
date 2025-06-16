@@ -42,35 +42,35 @@ export abstract class BaseRepository<T> {
       .from(this.table)
       .where(eq((this.table as any).id, input.id));
 
-    const result = await query.execute();
+    const [result] = await query.execute();
     return result as T;
   }
 
   async create(data: Omit<T, "id" | "createdAt" | "updatedAt">): Promise<T> {
     const [record] = await db.insert(this.table).values(data).returning();
 
-    return record as unknown as T;
+    return record as T;
   }
 
   async update(input: {
     id: string;
     data: Partial<Omit<T, "id" | "createdAt" | "updatedAt">>;
-  }): Promise<T | undefined> {
+  }): Promise<T> {
     const [record] = await db
       .update(this.table)
       .set({ ...input.data, updatedAt: new Date() })
       .where(eq((this.table as any).id, input.id))
       .returning();
 
-    return record as T | undefined;
+    return record as T;
   }
 
-  async delete(input: { id: string }): Promise<T | undefined> {
-    const [record] = await db
+  async delete(input: { id: string }): Promise<boolean> {
+    await db
       .delete(this.table)
       .where(eq((this.table as any).id, input.id))
-      .returning();
+      .execute();
 
-    return record as T | undefined;
+    return true;
   }
 }

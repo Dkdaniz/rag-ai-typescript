@@ -1,10 +1,15 @@
-import { varchar, pgTable, timestamp, uuid, text } from "drizzle-orm/pg-core";
+import { varchar, pgTable, timestamp, text } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { relations } from "drizzle-orm";
+import { createUUID } from "@repo/utils";
 
 export const questions = pgTable("questions", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: varchar("user_id").references(() => users.id),
+  id: varchar("id", { length: 36 })
+    .$defaultFn(() => createUUID())
+    .primaryKey(),
+  userId: varchar("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
   content: text("content").notNull(),
   answer: text("answer").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

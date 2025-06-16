@@ -1,18 +1,18 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { ChunkRepository, DocumentRepository } from "@repo/drizzle";
-import { DocumentRepositoryQdrant } from "@repo/qdrant";
+import { ChunkRepositoryQdrant } from "@repo/qdrant";
 import { chunkTextByTokens, encoderGeneric } from "@repo/utils";
 import { embedding } from "@repo/embedding";
 
 export class ChunkController {
   private chunkRepository: ChunkRepository;
   private documentRepository: DocumentRepository;
-  private documentRepositoryQdrant: DocumentRepositoryQdrant;
+  private chunkRepositoryQdrant: ChunkRepositoryQdrant;
 
   constructor() {
     this.chunkRepository = new ChunkRepository();
     this.documentRepository = new DocumentRepository();
-    this.documentRepositoryQdrant = new DocumentRepositoryQdrant();
+    this.chunkRepositoryQdrant = new ChunkRepositoryQdrant();
   }
 
   async find(_req: FastifyRequest, reply: FastifyReply) {
@@ -30,7 +30,10 @@ export class ChunkController {
       return reply.status(404).send({ error: "Document not found" });
     }
 
+    await this.chunkRepositoryQdrant.initCollection(768, "Cosine");
+
     const encoder = encoderGeneric("cl100k_base");
+
     const chunks = chunkTextByTokens({
       encoder: encoder,
       text: doc.text,
@@ -40,22 +43,30 @@ export class ChunkController {
 
     for (const content of chunks) {
       const vector = await embedding(content);
+
       const tokenCount = encoder.encode(content).length;
 
       const chunk = await this.chunkRepository.create({
+        userId: doc.userId,
         documentId,
         content,
         tokenCount,
       });
 
-      await this.documentRepositoryQdrant.upsert([
+      await this.chunkRepositoryQdrant.upsert([
         {
           id: chunk.id,
           vector,
-          payload: { documentId, content },
+          payload: {
+            userId: chunk.userId,
+            documentId: chunk.documentId,
+            content,
+          },
         },
       ]);
     }
+
+    encoder.free();
 
     reply.send({ message: "Chunks created", total: chunks.length });
   }
@@ -74,11 +85,13 @@ export class ChunkController {
 
     const vector = await embedding(content);
 
-    await this.documentRepositoryQdrant.upsert([
+    await this.chunkRepositoryQdrant.initCollection(768, "Cosine");
+    await this.chunkRepositoryQdrant.upsert([
       {
         id,
         vector,
         payload: {
+          userId: updated.userId,
           documentId: updated.documentId,
           content,
         },
@@ -91,14 +104,15 @@ export class ChunkController {
   async findById(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
     const chunk = await this.chunkRepository.findById({ id });
+    const vector = await this.chunkRepositoryQdrant;
     if (!chunk) return reply.status(404).send({ error: "Chunk not found" });
-    reply.send(chunk);
+    reply.send({ chunk, vector });
   }
 
   async delete(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
     await this.chunkRepository.delete({ id });
-    await this.documentRepositoryQdrant.deleteById(id);
+    await this.chunkRepositoryQdrant.deleteById(id);
     reply.send({ message: "Deleted." });
   }
 }

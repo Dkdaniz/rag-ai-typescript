@@ -1,12 +1,17 @@
-import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { users } from "./users";
 
 import { relations } from "drizzle-orm";
 import { chunks } from "./chunks";
+import { createUUID } from "@repo/utils";
 
 export const documents = pgTable("documents", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: varchar("user_id").references(() => users.id),
+  id: varchar("id", { length: 36 })
+    .$defaultFn(() => createUUID())
+    .primaryKey(),
+  userId: varchar("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
   source: text("source").notNull(),
   text: text("text").notNull(),
   hash: varchar("hash", { length: 64 }).notNull().unique(),

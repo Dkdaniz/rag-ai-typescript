@@ -1,18 +1,26 @@
 import { OllamaProvider, OpenAIProvider } from "@repo/llm";
-import { DocumentRepository } from "@repo/qdrant";
+import { ChunkRepositoryQdrant } from "@repo/qdrant";
 import { embedding } from "@repo/embedding";
 import { AI_IS_LOCAL } from "@repo/env";
 
-export class RAGService {
-  private documentRepository = new DocumentRepository();
+export type FilterAsk = {
+  key: string;
+  value: string;
+};
 
-  async ask(question: string): Promise<string> {
+export class RAGService {
+  private chunkRepository = new ChunkRepositoryQdrant();
+
+  async ask(question: string, filter?: FilterAsk[]): Promise<string> {
+    console.log(question);
+
     const vector = await embedding(question);
 
-    await this.documentRepository.initCollection(768, "Cosine");
-    const docs = await this.documentRepository.search(vector, 5);
+    await this.chunkRepository.initCollection(768, "Cosine");
+    const docs = await this.chunkRepository.search(vector, 5, filter);
 
-    const context = docs.map((d) => d.payload?.text).join("\n---\n");
+    const context = docs.map((d) => d.payload?.content).join("\n---\n");
+    console.log({ context });
     const messages = [
       {
         role: "system",

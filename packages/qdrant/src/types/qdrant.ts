@@ -13,3 +13,8 @@ export interface QdrantSearchResult {
   score: number;
   payload?: QdrantPayload;
 }
+
+export type QdrantFilter = {
+  key: string;
+  value: string;
+};

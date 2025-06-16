@@ -11,12 +11,12 @@ if (!connectionString) {
 }
 
 // Client for queries only
-export const connection = postgres(process.env.DATABASE_URL as string, {
+export const connection = postgres(connectionString, {
   max: 1,
   ssl: process.env.NODE_ENV === "production" ? "require" : false,
 });
 
-// ✅ Drizzle ORM instance com schema tipado
+// ✅ Drizzle ORM instance com schema
 export const db = drizzle(connection, { schema });
 
 export type DB = typeof db;

@@ -1,18 +1,23 @@
 import {
   pgTable,
-  uuid,
   text,
-  varchar,
   timestamp,
   integer,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { documents } from "./documents";
+import { documents, users } from "./";
+import { createUUID } from "@repo/utils";
 
 export const chunks = pgTable("chunks", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: varchar("id", { length: 36 })
+    .$defaultFn(() => createUUID())
+    .primaryKey(),
+  userId: varchar("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
   documentId: varchar("document_id")
-    .references(() => documents.id)
+    .references(() => documents.id, { onDelete: "cascade" })
     .notNull(),
   content: text("content").notNull(),
   tokenCount: integer("token_count").notNull(),
@@ -24,6 +29,10 @@ export const chunksRelations = relations(chunks, ({ one }) => ({
   document: one(documents, {
     fields: [chunks.documentId],
     references: [documents.id],
+  }),
+  user: one(users, {
+    fields: [chunks.userId],
+    references: [users.id],
   }),
 }));
 

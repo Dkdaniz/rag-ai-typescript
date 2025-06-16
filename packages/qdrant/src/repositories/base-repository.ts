@@ -3,6 +3,7 @@ import type {
   QdrantPoint,
   QdrantSearchResult,
   QdrantPayload,
+  QdrantFilter,
 } from "../types/qdrant";
 
 export abstract class QdrantBaseRepository {
@@ -31,10 +32,28 @@ export abstract class QdrantBaseRepository {
     await qdrantClient.delete(this.collectionName, { points: [id] });
   }
 
-  async search(vector: number[], topK = 5): Promise<QdrantSearchResult[]> {
+  async search(
+    vector: number[],
+    topK = 5,
+    filtersByFields?: QdrantFilter[]
+  ): Promise<QdrantSearchResult[]> {
+    const paramFilter = filtersByFields
+      ? filtersByFields.map((filter) => {
+          return {
+            key: filter.key,
+            match: {
+              value: filter.value,
+            },
+          };
+        })
+      : [];
+
+    const filter = paramFilter.length === 0 ? {} : { must: paramFilter };
+
     const result = await qdrantClient.search(this.collectionName, {
       vector,
       limit: topK,
+      filter,
     });
 
     return result.map((r) => ({

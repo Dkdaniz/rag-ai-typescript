@@ -9,17 +9,14 @@ export const encoderGeneric = (encoderType: encoderType): Tiktoken =>
 export const encoderFromModel = (model: TiktokenModel) =>
   encoding_for_model(model);
 
-export function chunkTextByTokens({
-  encoder,
-  text,
-  maxTokens = 200,
-  overlap = 30,
-}: {
+export function chunkTextByTokens(input: {
   encoder: Tiktoken;
   text: string;
   maxTokens: number;
   overlap: number;
 }): string[] {
+  const { encoder, text, maxTokens = 200, overlap = 30 } = input;
+
   const sentences = text.split(/(?<=[.?!])\s+/);
   const chunks: string[] = [];
   let current = "";
@@ -48,6 +45,5 @@ export function chunkTextByTokens({
     chunks.push(current.trim());
   }
 
-  encoder.free();
   return chunks;
 }

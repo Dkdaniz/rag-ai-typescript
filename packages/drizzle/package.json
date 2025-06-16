@@ -7,9 +7,10 @@
     "build": "tsup",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "generate": "drizzle-kit generate",
-    "migrate": "tsx src/migrate.ts",
-    "studio": "drizzle-kit studio"
+    "generate": "pnpm env:load drizzle-kit generate",
+    "migrate": "pnpm env:load tsx src/migrate.ts",
+    "studio": "pnpm env:load drizzle-kit studio",
+    "env:load": "dotenv -e ../../.env --"
   },
   "keywords": [],
   "author": "Daniel Marques",
@@ -23,10 +24,12 @@
   "devDependencies": {
     "@repo/eslint": "workspace:*",
     "@repo/tsconfig": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/pg": "^8.15.4",
     "chalk": "^5.4.1",
     "drizzle-kit": "^0.31.1",
+    "dotenv-cli": "^8.0.0",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
